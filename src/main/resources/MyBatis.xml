@@ -11,7 +11,7 @@
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/CactivityWeb?serverTimezone=UTC"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/cactivityweb?serverTimezone=UTC"/>
                 <property name="username" value="root"/>
                 <property name="password" value="root"/>
             </dataSource>
