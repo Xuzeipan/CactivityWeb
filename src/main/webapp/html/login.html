@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录界面</title>
+    <link href="../css/login.css" type="text/css" rel="stylesheet">
+    <link href="../css/xtiper.css" type="text/css" rel="stylesheet" />
+    <link rel="shortcut icon" href="#" />
+</head>
+
+<body style="background:linear-gradient(to left top,#00D2FF,#928DAB)">
+    <div class="container">
+        <div class="front">
+            <div class="contents">
+                <h2>校园活动网</h2>
+            </div>
+        </div>
+        <div class="back">
+            <div class="contents1">
+                <p>登录</p>
+                学号：<input id="num" type="text" name="username" /><br>
+                密码：<input id="psw" type="password" name="password" /><br>
+                <a href="#">修改密码</a>
+                <p id="p1"></p>
+                <button id="login" class="left-dl" onclick="checkAll()" type="button">登录</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../js/xtiper.js" type="text/javascript"></script>
+<script src="../js/jquery-3.4.1.js" type="text/javascript"></script>
+<script>
+    var number = document.getElementById("num");
+    var psw = document.getElementById("psw");
+    function checkAll() {
+        var Element = document.getElementById("num").value;
+        var pswElement = document.getElementById("psw").value;
+        var tip = document.getElementById("p1");
+        var isPass = true;
+            if(Element == "" && pswElement == ""){
+                xtip.msg('学号和密码不能为空',{icon:'e',type:'w'})
+                return isPass = false
+            }
+            if (Element == null || Element.replace(/(^\s*)|(\s*$)/g, "") == "") {
+                xtip.msg('学号不能为空',{icon:'e',type:'w'})
+                return isPass = false
+            }
+            if (pswElement == null || pswElement.replace(/(^\s*)|(\s*$)/g, "") == "") {
+                xtip.msg('密码不能为空',{icon:'e',type:'w'})
+                return isPass = false
+            }
+            if (isNaN(Element)) {
+                xtip.msg('学号只能为数字',{icon:'e',type:'w'})
+                return isPass = false
+            }  
+            if (Element.length != 12 || pswElement.length < 6) {
+                xtip.msg('学号只能为12个字符并且密码必须大于6位',{icon:'e',type:'w'})
+                return isPass = false
+            }
+            if (isPass){
+                $.ajax({
+                    url:"../loginServlet",
+                    data:{'stuNumber':number.value,'password':psw.value},
+                    method:"post"
+                }).done(function (data) {
+                    if (data.status == 0){
+                        location.href = "../html/index.html";
+                    }else if(data.status == 1){
+                        xtip.msg(data.msg,{icon:'e',type:'w'});
+                    }
+                }).fail(function () {
+                    xtip.msg("请求失败",{icon:'e',type:'w'});
+                })
+            }else{
+            }
+    // $("#login").click(function () {
+    //     if (checkAll()){
+    //         console.log("333");
+            // $.ajax({
+            //     url:"../loginServlet",
+            //     data:{'stuNumber':number.value,'password':psw.value},
+            //     method:"post"
+            // }).done(function (data) {
+            //     console.log("444");
+            //     if (data.status == 0){
+            //         console.log("555");
+            //         location.href = "../html/index.html";
+            //     }else if(data.status == 1){
+            //         xtip.msg(data.msg,{icon:'e',type:'w'});
+            //     }
+            // }).fail(function () {
+            //     xtip.msg("请求失败",{icon:'e',type:'w'});
+            // })
+    //     }
+    // })
+}
+</script>
