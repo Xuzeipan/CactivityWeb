@@ -8,7 +8,7 @@ public class Apply {
     private int id;     //报名表id
     private int acId;   //活动Id
     private int userId;     //userId
-    @JSONField(format = "yy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
     private Date applyTime;     //报名时间
 
     public Apply(){

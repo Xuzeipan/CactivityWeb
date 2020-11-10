@@ -8,7 +8,12 @@
     </select>
 
 <!--    根据学号和密码查找用户-->
-    <select id="queryUserByStuNumberAndPsw" resultType="User">
+    <select id="queryUserByStuNumberAndPsw" resultType="com.ldi.POJO.User">
         select * from user where stnumber =#{stuNumber} and password =#{password}
     </select>
+    
+<!--    根据学号条件更新密码-->
+    <update id="updatePswByStuNumber" parameterType="java.lang.String">
+        update user set password =#{newPsw} where stnumber =#{stuNumber}
+    </update>
 </mapper>

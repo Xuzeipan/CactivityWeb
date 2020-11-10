@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
         UserService userService = context.getBean(UserService.class);
         User user = userService.queryUserByStuNumberAndPsw(stuNumber, password);
         if (user == null){
-            Result result = new Result(1, "失败", null);
+            Result result = new Result(1, "学号或密码错误", null);
             JSONUtils.returnJson(response,result);
         }else{
             Result result = new Result(0, "成功", user);

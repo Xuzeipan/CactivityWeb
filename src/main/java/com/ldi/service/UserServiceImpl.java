@@ -16,4 +16,11 @@ public class UserServiceImpl implements UserService {
         User user = userMapper.queryUserByStuNumberAndPsw(stuNumber,psw);
         return user;
     }
+
+    @Override
+    public User updatePswByStuNumber(String newPsw, String stuNumber) {
+        userMapper.updatePswByStuNumber(newPsw, stuNumber);
+        User user = userMapper.queryUserByStuNumberAndPsw(newPsw, stuNumber);
+        return user;
+    }
 }
